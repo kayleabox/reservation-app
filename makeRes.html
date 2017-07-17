@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hot Restaurant</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Annie+Use+Your+Telescope|Crafty+Girls|Reenie+Beanie" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1><span><img style="width:70px;" src="images/cabbageicon.png"></span> Cabbage Patch</h1>
+      <h3>Make a Reservation</h3>
+      <hr>
+      <a href="/viewRes"><button type="button" class="btn btn-md green-btn"><span class="glyphicon glyphicon-list-alt"></span> View Reservations</button></a>
+      <a href="/home"><button type="button" class="btn btn-default btn-md"><span class="glyphicon glyphicon-home"></span></button></a>
+
+    </div>
+    <div class="row">
+
+      <div class="col-lg-12">
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Make a Reservation</strong></h3>
+          </div>
+          <div class="panel-body">
+            <form method="POST" role="form">
+
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter name">
+              </div>
+
+              <div class="form-group">
+                <label for="num">Number of Guests</label>
+                <input type="text" class="form-control" id="num" placeholder="Enter number in party">
+              </div>
+
+              <div class="form-group">
+                <label for="num">Email</label>
+                <input type="text" class="form-control" id="email" placeholder="Enter email">
+              </div>   
+
+              <div class="form-group">
+                <label for="num">Phone Number</label>
+                <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
+              </div>           
+
+            </form>
+            <br>
+            <div class="text-right">
+              <button type="submit" class="btn btn-md green-btn" id="add-btn"><span class="glyphicon glyphicon-cutlery"></span> Make Reservation</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var placeInLine = 1;
+      $.get("/api/", function (data) {
+        console.log(data);
+        if (data) {
+          placeInLine += data.length
+        }
+      });
+
+      $("#add-btn").on("click", function(event) {
+        event.preventDefault();
+        var newReservation = {
+          name: $("#name").val().trim(),
+          numGuests: $("#num").val().trim(),
+          email: $("#email").val().trim(),
+          phone: $("#phone").val().trim(),
+          place: placeInLine,
+          status: ""
+        };
+        if (placeInLine<=10){
+          newReservation.status = "reservation";
+        }
+        else{ 
+          newReservation.status = "waitlist";
+        }
+
+        $("#name").val("");
+        $("#num").val("");
+        $("#email").val("");
+        $("#phone").val("");
+
+        $.post("/api/new", newReservation)
+        .done(function(data) {
+          console.log(data);
+            alert("making reservation...");
+            placeInLine += 1;
+        });
+      });
+
+    });
+
+    
+  </script>
+
+</body>
+</html>

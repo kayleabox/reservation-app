@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hot Restaurant</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Annie+Use+Your+Telescope|Crafty+Girls|Reenie+Beanie" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="jumbotron text-center banner">
+      <h1><span><img style="width:70px;" src="images/cabbageicon.png"></span> Cabbage Patch</h1>
+      <h3 id="num-open-tables">Hurry! Make a reservation to save your spot!</h3>
+      <hr>
+      <a href="/viewRes"><button type="button" class="btn btn-md green-btn"><span class="glyphicon glyphicon-list-alt"></span> View Reservations</button></a>
+      <a href="/makeRes"><button type="button" class="btn btn-md btn-default"><span class="glyphicon glyphicon-cutlery"></span> Make Reservation</button></a>
+
+    </div>
+    
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $.get("/api/", function (data) {
+        console.log(data);
+        if (data) {
+          if(data.length<=10){
+              var remaining = 10-data.length;
+            $("#num-open-tables").text("Hurry! Only " + remaining + " tables left!");
+          }
+          else{
+            $("#num-open-tables").text("No more tables remain. Join our waitlist to get in.");              
+          }
+        }
+      });
+     
+    });
+
+    
+  </script>
+
+</body>
+</html>

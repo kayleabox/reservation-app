@@ -1,0 +1,66 @@
+body{
+    background-image: url('images/cabbagebackground.jpg');
+    margin:auto;
+}
+
+.container{
+    max-width: 800px;
+    margin-top: 50px;
+    color: #5c9955;
+    /*font-family: 'Amatic SC', cursive;
+    font-family: 'Reenie Beanie', cursive;*/
+    /*font-family: 'Annie Use Your Telescope', cursive;*/
+    font-family: 'Crafty Girls', cursive;
+}
+
+.jumbotron{
+    background-color: #CBE3CA/*#E3F2E3*/;
+    opacity: .7;
+}
+
+.jumbotron:hover{
+    opacity: .9;
+}
+
+.panel-heading{
+    background-color: #CBE3CA/*#E3F2E3*/;
+}
+
+.panel{
+    opacity: .7;
+}
+
+.panel:hover{
+    opacity: .9;
+}
+
+.place-btn{
+    background-image: url('images/cabbagebtn.png');
+    background-size: 100%;
+}
+
+.place-btn:hover{
+    background-image: url('images/cabbagebtnhov.png');
+    background-size: 100%;
+}
+
+.res-item{
+    margin-bottom:5px;
+}
+
+#search-res{
+    opacity: .8;
+}
+
+#search-res:hover{
+    opacity: 1.0;
+}
+
+.green-btn{
+    background-color: #5c9955;
+    color: #CBE3CA;
+}
+
+.btn-default{
+    color: #5c9955;
+}
